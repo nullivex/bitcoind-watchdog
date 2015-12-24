@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-var infant = require('infant')
+var cp = require('child_process')
 var program = require('commander')
 
 var pkg = require('./package.json')
@@ -16,28 +16,18 @@ var errorHandler = function(err){
   process.exit(1)
 }
 
-var child = infant.parent('bitcoind')
-
-//start bitcoind
-child.start(function(err){
-  if(err) return errorHandler(err)
-  //report
-  console.log('Bitcoind running')
-})
-
-child.on('status',function(status){
-  if('ok' === status){
-    //wire up io
-    process.stdin.pipe(child.cp.stdin)
-    child.cp.stdout.pipe(process.stdout)
-    child.cp.stderr.pipe(process.stderr)
-  }
-})
+var bitcoind
+var spawnBitcoind = function(){
+  bitcoind = cp.spawn('bitcoind',[],{stdio: [0,1,2], uid: 0, gid: 0})
+}
 
 //setup our restart function
 var restartBitcoind = function(done){
-  child.restart(function(err){
-    done(err)
+  cp.exec('bitcoin-cli stop',function(err){
+    if(err) console.log('Failed to stop bitcoind',err,err.trace)
+    bitcoind.kill(9)
+    spawnBitcoind()
+    done()
   })
 }
 

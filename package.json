@@ -16,8 +16,7 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
-    "commander": "^2.9.0",
-    "infant": "^0.10.0"
+    "commander": "^2.9.0"
   },
   "bin": {
     "bitcoind-watchdog": "./index.js"
