@@ -18,15 +18,20 @@ var errorHandler = function(err){
 
 var child = infant.parent('bitcoind')
 
-//wire up io
-process.stdin.pipe(child.cp.stdin)
-child.cp.stdout.pipe(process.stdout)
-child.cp.stderr.pipe(process.stderr)
-
 //start bitcoind
 child.start(function(err){
   if(err) return errorHandler(err)
+  //report
   console.log('Bitcoind running')
+})
+
+child.on('status',function(status){
+  if('ok' === status){
+    //wire up io
+    process.stdin.pipe(child.cp.stdin)
+    child.cp.stdout.pipe(process.stdout)
+    child.cp.stderr.pipe(process.stderr)
+  }
 })
 
 //setup our restart function
