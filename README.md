@@ -38,7 +38,7 @@ We need to setup ndt for this
 ```
 $ mkdir /opt/bitcoind-watchdog
 $ cd /opt/bitcoind-watchdog
-``
+```
 
 Make `/opt/bitcoind-watchdog/dt.json` like so
 
