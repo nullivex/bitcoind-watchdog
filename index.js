@@ -21,6 +21,9 @@ var spawnBitcoind = function(){
   bitcoind = cp.spawn('bitcoind',[],{stdio: [0,1,2], uid: 0, gid: 0})
 }
 
+//spawn initial child
+spawnBitcoind()
+
 //setup our restart function
 var restartBitcoind = function(done){
   cp.exec('bitcoin-cli stop',function(err){
