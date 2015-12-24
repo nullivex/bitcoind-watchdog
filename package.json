@@ -1,0 +1,25 @@
+{
+  "author": "Bryan Tong <contact@nullivex.com>",
+  "name": "bitcoind-watchdog",
+  "description": "Bitcoind watchdog process",
+  "version": "0.1.0",
+  "homepage": "http://github.com/nullivex",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nullivex/bitcoind-watchdog.git"
+  },
+  "main": "app.js",
+  "keywords": [
+    "oose"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "infant": "^0.10.0"
+  },
+  "bin": {
+    "bitcoind-watchdog": "./index.js"
+  }
+}
