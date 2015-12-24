@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict';
 var infant = require('infant')
 var program = require('commander')
